@@ -20,3 +20,20 @@ def pregunta_10():
 
 
     """
+    with open("files/input/data.csv", "r") as file:
+        data = [[i.split("\t")[0]] + i.split("\t")[3:] for i in file.readlines()]
+
+        contador = [
+            (
+                item[0],
+                len(item[1].split(",")),
+                len(item[2].split(",")),
+            )
+            for item in data
+        ]
+
+    return contador
+
+
+if __name__ == "__main__":
+    print(pregunta_10())

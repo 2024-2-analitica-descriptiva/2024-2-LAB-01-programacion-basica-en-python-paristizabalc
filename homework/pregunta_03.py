@@ -15,3 +15,16 @@ def pregunta_03():
     [('A', 53), ('B', 36), ('C', 27), ('D', 31), ('E', 67)]
 
     """
+    with open("files/input/data.csv", "r") as file:
+        data = [i.split("\t")[:2] for i in file.readlines()]
+
+    acumulado = {
+        key: sum(int(value) for k, value in data if k == key)
+        for key in set(k for k, _ in data)
+    }
+
+    return sorted(list(acumulado.items()))
+
+
+if __name__ == "__main__":
+    print(pregunta_03())

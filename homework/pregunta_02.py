@@ -15,3 +15,13 @@ def pregunta_02():
     [('A', 8), ('B', 7), ('C', 5), ('D', 6), ('E', 14)]
 
     """
+    with open("files/input/data.csv", "r") as file:
+        data = [i.split("\t")[0] for i in file.readlines()]
+
+    data = sorted([(i, data.count(i)) for i in set(data)])
+
+    return data
+
+
+if __name__ == "__main__":
+    print(pregunta_02())

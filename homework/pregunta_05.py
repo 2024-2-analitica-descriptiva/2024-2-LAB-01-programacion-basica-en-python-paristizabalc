@@ -15,3 +15,20 @@ def pregunta_05():
     [('A', 9, 2), ('B', 9, 1), ('C', 9, 0), ('D', 8, 3), ('E', 9, 1)]
 
     """
+    with open("files/input/data.csv", "r") as file:
+        data = [i.split("\t")[:2] for i in file.readlines()]
+
+    min_max = [
+        (
+            key,
+            max(int(value) for k, value in data if k == key),
+            min(int(value) for k, value in data if k == key),
+        )
+        for key in set(k for k, _ in data)
+    ]
+
+    return sorted(min_max)
+
+
+if __name__ == "__main__":
+    print(pregunta_05())

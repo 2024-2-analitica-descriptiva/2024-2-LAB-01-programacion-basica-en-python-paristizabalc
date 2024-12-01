@@ -4,7 +4,7 @@ datos requeridos se encuentran en el archivo data.csv. En este laboratorio
 solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
-
+import itertools
 
 def pregunta_06():
     """
@@ -26,3 +26,22 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+    with open("files/input/data.csv", "r") as file:
+        data = [i.split("\t")[4].replace("\n", "").split(",") for i in file.readlines()]
+
+        data = [i.split(":") for i in list(itertools.chain(*data))]
+
+    min_max = [
+        (
+            key,
+            min(int(value) for k, value in data if k == key),
+            max(int(value) for k, value in data if k == key),
+        )
+        for key in set(k for k, _ in data)
+    ]
+
+    return sorted(min_max)
+
+
+if __name__ == "__main__":
+    print(pregunta_06())

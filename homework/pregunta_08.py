@@ -27,3 +27,16 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+    with open("files/input/data.csv", "r") as file:
+        data = [i.split("\t")[:2] for i in file.readlines()]
+
+    agrupador = {
+        int(key): sorted(set([value for value, k in data if int(k) == int(key)]))
+        for key in set(k for _, k in data)
+    }
+
+    return sorted(list(agrupador.items()))
+
+
+if __name__ == "__main__":
+    print(pregunta_08())
